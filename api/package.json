@@ -1,0 +1,17 @@
+{
+  "name": "ssme-app-api",
+  "version": "1.0.0",
+  "description": "API for ssme-app.",
+  "main": "index.js",
+  "author": "Martin Galajda",
+  "license": "ISC",
+  "dependencies": {
+    "kcors": "^2.2.2",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-compress": "^3.0.0",
+    "koa-router": "^7.4.0",
+    "pino": "^5.12.5",
+    "uuid": "^3.3.2"
+  }
+}

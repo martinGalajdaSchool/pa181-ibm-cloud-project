@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssme-app-api-service
+  labels:
+    service-name: ssme-app-api
+    app-name: ssme-app
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+  selector:
+    service-name: ssme-app-api
+    app-name: ssme-app

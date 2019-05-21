@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssme-app-api-deployment
+  labels:
+    service-name: ssme-app-api
+    app-name: ssme-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service-name: ssme-app-api
+      app-name: ssme-app
+  template:
+    metadata:
+      labels:
+        service-name: ssme-app-api
+        app-name: ssme-app
+    spec:
+      containers:
+        - name: ssme-app-api
+          image: de.icr.io/ssme-app/ssme-app-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          resources:
+            limits:
+              cpu: 300m
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 256Mi
