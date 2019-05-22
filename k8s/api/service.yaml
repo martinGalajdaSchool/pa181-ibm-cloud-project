@@ -12,6 +12,7 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 3000
+      nodePort: 30080
   selector:
     service-name: ssme-app-api
     app-name: ssme-app

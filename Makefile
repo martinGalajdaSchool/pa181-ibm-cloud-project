@@ -38,3 +38,13 @@ build_and_push_docker_image:
 	# ibmcloud cr build -t <region>.icr.io/<namespace>/ssme-app-api
 	ibmcloud cr build -t de.icr.io/ssme-app/ssme-app-api ./api
 
+build_and_push_docker_tagged_image:
+	# ibmcloud cr build -t <region>.icr.io/<namespace>/ssme-app-api
+	ibmcloud cr build -t de.icr.io/ssme-app/ssme-app-api:$(tag) ./api --pull --no-cache
+
+ls_docker_images:
+	# ibmcloud cr build -t <region>.icr.io/<namespace>/ssme-app-api
+	ibmcloud cr images
+
+reload_worker:
+	ibmcloud ks worker-reload --workers kube-mil01-pa9ba7245e6f154f03b2d2c40928d563cb-w1 --cluster ssme-app

@@ -24,3 +24,12 @@ ls_pods:
 
 ls_ibm_workers:
 	ibmcloud ks workers $(cluster_name)
+
+public-ip:
+	ibmcloud ks workers $(cluster_name) | tail -n 1 | awk '{print $$2}'
+
+api-port:
+	make describe_api_service | grep NodePort | awk '{print $$3}'
+
+set-default-namespace:
+	kubectl config set-context --current --namespace=$(namespace_name)

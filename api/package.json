@@ -6,9 +6,12 @@
   "author": "Martin Galajda",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^15.0.3",
+    "joi": "^14.3.1",
     "kcors": "^2.2.2",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
+    "koa-compose": "^4.1.0",
     "koa-compress": "^3.0.0",
     "koa-router": "^7.4.0",
     "pino": "^5.12.5",

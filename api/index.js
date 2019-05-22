@@ -33,7 +33,7 @@ app.stop = () => {
     return
   }
 
-  log.info('Stopping server ...')
+  log.info('Stopping server! 😱')
   app.server.close(() => {
     log.info('Server stopped.')
   })

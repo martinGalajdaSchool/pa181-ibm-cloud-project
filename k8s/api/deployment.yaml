@@ -19,8 +19,8 @@ spec:
     spec:
       containers:
         - name: ssme-app-api
-          image: de.icr.io/ssme-app/ssme-app-api:latest
-          imagePullPolicy: IfNotPresent
+          image: de.icr.io/ssme-app/ssme-app-api
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 3000
@@ -44,3 +44,11 @@ spec:
             requests:
               cpu: 200m
               memory: 256Mi
+          volumeMounts:
+            - mountPath: /opt/service-bind
+              name: service-bind-volume
+      volumes:
+        - name: service-bind-volume
+          secret:
+            defaultMode: 420
+            secretName: binding-texttospeech
