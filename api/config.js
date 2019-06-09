@@ -50,7 +50,7 @@ const config = {
   services: {
     textToSpeech: {
       ...textToSpeechConfig,
-      maxCharsToSynthesize: process.env.MAX_CHARS_TO_SYNTHESIZE || 10,
+      maxCharsToSynthesize: process.env.MAX_CHARS_TO_SYNTHESIZE ? parseInt(process.env.MAX_CHARS_TO_SYNTHESIZE) : 10,
     }
   },
 }

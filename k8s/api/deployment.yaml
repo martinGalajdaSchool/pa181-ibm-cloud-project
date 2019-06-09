@@ -19,8 +19,11 @@ spec:
     spec:
       containers:
         - name: ssme-app-api
-          image: de.icr.io/ssme-app/ssme-app-api
+          image: de.icr.io/ssme-app/ssme-app-api:0.0.5
           imagePullPolicy: Always
+          env:
+            - name: MAX_CHARS_TO_SYNTHESIZE
+              value: '50'
           ports:
             - name: http
               containerPort: 3000
@@ -39,7 +42,7 @@ spec:
             periodSeconds: 10
           resources:
             limits:
-              cpu: 300m
+              cpu: 400m
               memory: 512Mi
             requests:
               cpu: 200m
@@ -47,6 +50,9 @@ spec:
           volumeMounts:
             - mountPath: /opt/service-bind
               name: service-bind-volume
+              readOnly: true
+      imagePullSecrets:
+        - name: ssme-app-de-icr-io
       volumes:
         - name: service-bind-volume
           secret:

@@ -1,6 +1,6 @@
 
 
-cluster_name=ssme-app
+cluster_name=ssme-app-v2
 
 export KUBECONFIG=/Users/martingalajda/.bluemix/plugins/container-service/clusters/ssme-app/kube-config-mil01-ssme-app.yml
 

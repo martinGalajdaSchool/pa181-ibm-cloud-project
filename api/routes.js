@@ -44,5 +44,49 @@ router.get('/synthesize', compose([
   }
 ]))
 
+
+router.get('/verify-email', compose([
+  async ctx => {
+    const email = ctx.query.email
+
+    if (email.includes('invalid')) {
+      ctx.body = {
+        isValid: false,
+      }
+    } else {
+      ctx.body = {
+        isValid: true,
+      }
+    }
+
+    ctx.status = 200
+  }
+]))
+
+
+router.post('/rating', compose([
+  async ctx => {
+
+    ctx.body = {
+      success: true,
+      message: 'Thank you for your feedback!',
+    }
+
+    ctx.status = 200
+  }
+]))
+
+router.post('/cancel-contract', compose([
+  async ctx => {
+
+    ctx.body = {
+      success: true,
+      message: 'Contract has been successfully canceled!',
+    }
+
+    ctx.status = 200
+  }
+]))
+
 const routes = router.routes()
 module.exports = routes

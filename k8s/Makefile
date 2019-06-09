@@ -1,5 +1,5 @@
 namespace_name=ssme-app
-cluster_name=ssme-app
+cluster_name=ssme-app-v2
 
 ls_namespaces:
 	kubectl get namespaces
