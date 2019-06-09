@@ -107,16 +107,23 @@ class Speech extends Component {
                 this.props.topic !== '' ?
                     <div className='box'>
                         <img className='play-pause' src={this.state.paused ? playImg : pauseImg} alt=""/>
-                        <b>{this.state.iterator}</b>
+                        <div>
+                            <i className="message-number">MESSSAGE NUMBER {this.state.iterator}:</i>
+                        </div>
                     </div>
-                    :
+
+                :
                     <React.Fragment/>
             }
-            <div>
-                <i>{this.state.title}</i>
+            <div className='message'>
+                <div>
+                <i className='message-title'>{this.state.title}</i>
+
             </div>
-            <div>
+
+            <div className='message-text'>
                 {this.state.message}
+            </div>
             </div>
         </div>
     }

@@ -20,6 +20,7 @@ class Main extends Component {
             let key = e.key;
 
             switch(key) {
+                case '0': t.changeFont(); break;
                 case '1': t.topicBusiness(); break;
                 case '2': t.topicEntertainment(); break;
                 case '3': t.topicGeneral(); break;
@@ -35,6 +36,12 @@ class Main extends Component {
             }
         });
     }
+
+    changeFont(){
+        let font = document.getElementsByClassName('App')[0].style.fontFamily;
+        document.getElementsByClassName('App')[0].style.fontFamily = (font == 'BRAILLE1') ? '' : 'BRAILLE1';
+    }
+
 
     topicBusiness() {
         this.setState({topic : 'business'});
@@ -64,10 +71,6 @@ class Main extends Component {
         this.setState({topic : 'technology'});
     }
 
-    toggle() {
-
-    }
-
     buttonClasses(button) {
         if (button === this.state.topic) return "btn btn-success";
         return "btn btn-primary";
@@ -75,7 +78,8 @@ class Main extends Component {
 
     render() {
         return <div id='viewport'>
-            <div id='choose'> CHOOSE CATEGORY</div>
+            <button type="button" id="toggle_font" className='btn btn-info'>Toggle font </button>
+            <div id='choose'> <b> CHOOSE THE CATEGORY </b></div>
             <div id="buttons">
                 <button type="button" className={this.buttonClasses('business')}>Business</button>
                 <button type="button" className={this.buttonClasses('entertainment')}>Entertainment</button>
@@ -95,6 +99,10 @@ class Main extends Component {
                     </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <th scope="row">0</th>
+                        <td>Toggle font</td>
+                    </tr>
                     <tr>
                         <th scope="row">→</th>
                         <td>Next message</td>

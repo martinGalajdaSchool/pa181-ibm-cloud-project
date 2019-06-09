@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  margin-right: 10%;
+  margin-left: 10%;
 }
 
 @keyframes App-logo-spin {
@@ -12,17 +14,52 @@
 }
 
 .play-pause {
-  height: 20px;
-  margin-right: 10px;
+  height: 70px;
+  margin-bottom: 40px;
 }
 
+#hint{
+  margin-top: 50px;
+}
+
+.message-number{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.message-title{
+  font-size: 50px;
+  font-weight: bold;
+  width: 90%;
+  margin:auto;
+}
+
+.message-text{
+  font-size: 35px;
+  width: 90%;
+  margin:auto;
+  margin-top: 20px !important;
+}
+
+hr{
+  color:black;
+  size: 10px;
+}
 #viewport{
-  margin-top:150px;
+  margin-top:14px;
 }
 
+.message{
+  border-radius: 15px;
+  border: 0px solid black;
+  background-color: rgb(153, 204, 255);
+}
 .btn{
-  font-size: 20px;
+  font-size: 25px !important;
   border: 1px solid grey;
+  padding: 10px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
 }
 
 .btn-success, .btn-primary {
@@ -38,14 +75,35 @@
   margin-bottom:30px;
 }
 
+#toggle_font{
+  display: none;
+}
+
 .table{
   margin: auto;
-  width: 50% !important;
+  width: 60% !important;
   margin-top: 20px;
+  font-size: 25px;
 }
 
 .box {
-  display: flex;
+  #display: flex;
   align-items: center;
   justify-content: center;
+  margin-top:20px;
+  margin-bottom: 20px;
 }
+
+@font-face {
+  font-family: 'Raphigrafie';
+  src: url('Raphigrafie.ttf') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  url('Raphigrafie.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+@font-face {
+  font-family: 'BRAILLE1';
+  src: url('BRAILLE1.ttf') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  url('BRAILLE1.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+
