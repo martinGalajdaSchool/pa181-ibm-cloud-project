@@ -7,7 +7,6 @@ class Main extends Component {
         super();
         this.state = {
             topic: '',
-            esc: false,
             changeTime: 0
         }
     }
@@ -28,10 +27,10 @@ class Main extends Component {
                 case '5': t.topicScience(); break;
                 case '6': t.topicSports(); break;
                 case '7': t.topicTechnology(); break;
-                case 'Escape': t.setState({change: 'default', changeTime: Date.now()}); break;
+                case 'Escape': t.setState({topic: '', change: 'default', changeTime: Date.now()}); break;
                 case 'ArrowLeft': t.setState({change: 'prev', changeTime: Date.now()}); break;
                 case 'ArrowRight': t.setState({change: 'next', changeTime: Date.now()}); break;
-                case ' ': t.setState({change: 'pause', changeTime: Date.now()}); break;
+                case 'p': t.setState({change: 'pause', changeTime: Date.now()}); break;
                 default: console.log(key);
             }
         });
@@ -44,31 +43,31 @@ class Main extends Component {
 
 
     topicBusiness() {
-        this.setState({topic : 'business'});
+        if(this.state.topic === '') this.setState({topic : 'business'});
     }
 
     topicSports() {
-        this.setState({topic : 'sports'});
+        if(this.state.topic === '') this.setState({topic : 'sports'});
     }
 
     topicGeneral() {
-        this.setState({topic : 'general'});
+        if(this.state.topic === '') this.setState({topic : 'general'});
     }
 
     topicEntertainment() {
-        this.setState({topic : 'entertainment'});
+        if(this.state.topic === '') this.setState({topic : 'entertainment'});
     }
 
     topicHealth() {
-        this.setState({topic : 'health'});
+        if(this.state.topic === '') this.setState({topic : 'health'});
     }
 
     topicScience() {
-        this.setState({topic : 'science'});
+        if(this.state.topic === '') this.setState({topic : 'science'});
     }
 
     topicTechnology() {
-        this.setState({topic : 'technology'});
+        if(this.state.topic === '') this.setState({topic : 'technology'});
     }
 
     buttonClasses(button) {
@@ -112,7 +111,7 @@ class Main extends Component {
                         <td>Previous message</td>
                     </tr>
                     <tr>
-                        <th scope="row">Space</th>
+                        <th scope="row">P</th>
                         <td>Pause/Play message</td>
                     </tr>
                     <tr>
