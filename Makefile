@@ -34,13 +34,17 @@ setup_kubernetes_env_variables:
 	. init_ibm_kubernetes_env.sh
 
 # Build docker image from API source code and push it to IBM container registry
-build_and_push_docker_image:
+build_and_push_api_docker_image:
 	# ibmcloud cr build -t <region>.icr.io/<namespace>/ssme-app-api
 	ibmcloud cr build -t de.icr.io/ssme-app/ssme-app-api ./api
 
-build_and_push_docker_tagged_image:
+build_and_push_docker_api_tagged_image:
 	# ibmcloud cr build -t <region>.icr.io/<namespace>/ssme-app-api
 	ibmcloud cr build -t de.icr.io/ssme-app/ssme-app-api:$(tag) ./api --pull --no-cache
+
+build_and_push_docker_fe_tagged_image:
+	# ibmcloud cr build -t <region>.icr.io/<namespace>/ssme-app-api
+	ibmcloud cr build -t de.icr.io/ssme-app/ssme-app-fe:$(tag) ./fe --pull --no-cache
 
 ls_docker_images:
 	# ibmcloud cr build -t <region>.icr.io/<namespace>/ssme-app-api

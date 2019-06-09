@@ -1,32 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ssme-app-api-deployment
+  name: ssme-app-fe-deployment
   labels:
-    service-name: ssme-app-api
+    service-name: ssme-app-fe
     app-name: ssme-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service-name: ssme-app-api
+      service-name: ssme-app-fe
       app-name: ssme-app
   template:
     metadata:
       labels:
-        service-name: ssme-app-api
+        service-name: ssme-app-fe
         app-name: ssme-app
     spec:
       containers:
         - name: ssme-app-api
-          image: de.icr.io/ssme-app/ssme-app-api:0.0.5
+          image: de.icr.io/ssme-app/ssme-app-fe:0.0.1
           imagePullPolicy: Always
-          env:
-            - name: MAX_CHARS_TO_SYNTHESIZE
-              value: '50'
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: 8000
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -47,14 +44,5 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
-          volumeMounts:
-            - mountPath: /opt/service-bind
-              name: service-bind-volume
-              readOnly: true
       imagePullSecrets:
         - name: ssme-app-de-icr-io
-      volumes:
-        - name: service-bind-volume
-          secret:
-            defaultMode: 420
-            secretName: binding-texttospeech

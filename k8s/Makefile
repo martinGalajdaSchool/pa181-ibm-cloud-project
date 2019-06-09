@@ -13,6 +13,12 @@ deploy_api:
 delete_api:
 	kubectl delete -f ./api --namespace=$(namespace_name)
 
+deploy_fe:
+	kubectl apply -f ./frontend --namespace=$(namespace_name)
+
+delete_fe:
+	kubectl delete -f ./frontend --namespace=$(namespace_name)
+
 describe_api_service:
 	kubectl describe service ssme-app-api-service --namespace=$(namespace_name)
 
