@@ -1,0 +1,51 @@
+.App {
+  text-align: center;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.play-pause {
+  height: 20px;
+  margin-right: 10px;
+}
+
+#viewport{
+  margin-top:150px;
+}
+
+.btn{
+  font-size: 20px;
+  border: 1px solid grey;
+}
+
+.btn-success, .btn-primary {
+  margin: 5px;
+}
+
+.btn-warning{
+  margin-top:120px;
+}
+
+#choose{
+  font-size: 50px;
+  margin-bottom:30px;
+}
+
+.table{
+  margin: auto;
+  width: 50% !important;
+  margin-top: 20px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
