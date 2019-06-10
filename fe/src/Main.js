@@ -7,7 +7,8 @@ class Main extends Component {
         super();
         this.state = {
             topic: '',
-            changeTime: 0
+            changeTime: 0,
+            entered: false
         }
     }
 
@@ -31,6 +32,7 @@ class Main extends Component {
                 case 'ArrowLeft': t.setState({change: 'prev', changeTime: Date.now()}); break;
                 case 'ArrowRight': t.setState({change: 'next', changeTime: Date.now()}); break;
                 case 'p': t.setState({change: 'pause', changeTime: Date.now()}); break;
+                case 'Enter': t.setState({ entered : true }); break;
                 default: console.log(key);
             }
         });
@@ -88,7 +90,12 @@ class Main extends Component {
                 <button type="button" className={this.buttonClasses('sports')}>Sports</button>
                 <button type="button" className={this.buttonClasses('technology')}>Technology</button>
             </div>
-            <Speech topic={this.state.topic} change={this.state.change} changeTime={this.state.changeTime} />
+            <Speech
+                topic={this.state.topic}
+                change={this.state.change}
+                changeTime={this.state.changeTime}
+                entered={this.state.entered}
+            />
             <div id="hint">
                 <table className="table table-striped table-sm">
                     <thead className="thead-dark">
@@ -99,8 +106,8 @@ class Main extends Component {
                     </thead>
                     <tbody>
                     <tr>
-                        <th scope="row">0</th>
-                        <td>Toggle font</td>
+                        <th scope="row">Enter</th>
+                        <td>Read intro</td>
                     </tr>
                     <tr>
                         <th scope="row">→</th>
@@ -117,6 +124,10 @@ class Main extends Component {
                     <tr>
                         <th scope="row">Esc</th>
                         <td>Main Menu</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">0</th>
+                        <td>Toggle font</td>
                     </tr>
                     <tr>
                         <th scope="row">1</th>

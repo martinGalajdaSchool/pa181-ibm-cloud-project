@@ -20,25 +20,10 @@ class Speech extends Component {
         }
     }
 
-    componentDidMount() {
-        let str = this.replaceSpaces(WELCOME.substring(0, 30)); // do not use substring
-
-        let url = URL + str;
-        let t = this;
-
-        let evt = new KeyboardEvent('keyup', {'keyCode':65, 'which':65});
-        document.dispatchEvent(evt);
-
-        window.audio = new Audio();
-        window.audio.src = url;
-        window.audio.play();
-
-        window.audio.addEventListener("ended", function w() {
-            t.setState({ welcome: false });
-        });
-    }
-
     componentWillReceiveProps(nextProps) {
+
+        if(nextProps.entered === true && this.state.welcome === true) this.doInit();
+
         if (this.props.changeTime !== nextProps.changeTime) {
             // window.audio.pause();
             if(nextProps.change === 'default') this.doDefault();
@@ -46,7 +31,7 @@ class Speech extends Component {
         }
 
         if (nextProps.topic && nextProps.topic !== '' && this.props.topic !== nextProps.topic) {
-            if (this.state.welcome === true) window.audio.pause();
+            if (nextProps.entered === true && this.state.welcome === true) window.audio.pause();
             this.handleSpeech(nextProps.topic);
         }
     }
@@ -63,14 +48,14 @@ class Speech extends Component {
     doUnpause() {
         if(this.props.topic !== '') {
             window.audio.play();
-            this.setState({paused: false});
+            this.setState({paused: false, welcome: false});
         }
     }
 
     doPause() {
         if(this.props.topic !== '') {
             window.audio.pause();
-            this.setState({paused: true});
+            this.setState({paused: true, welcome: false});
         }
     }
 
@@ -78,7 +63,7 @@ class Speech extends Component {
         if(this.props.topic !== '') {
             if (this.state.iterator > 0) {
                 window.audio.pause();
-                this.setState({paused: false});
+                this.setState({paused: false, welcome: false});
                 this.readMessage(this.state.data, this.state.iterator - 1);
             } else {
                 // window.audio.play();
@@ -90,7 +75,7 @@ class Speech extends Component {
         if(this.props.topic !== '') {
             if (this.state.iterator < this.state.data.length - 1) {
                 window.audio.pause();
-                this.setState({paused: false});
+                this.setState({paused: false, welcome: false});
                 this.readMessage(this.state.data, this.state.iterator + 1);
             } else {
                 // window.audio.play();
@@ -98,13 +83,41 @@ class Speech extends Component {
         }
     }
 
+    doInit() {
+        let str = this.replaceSpaces(WELCOME.substring(0, 5)); // do not use substring
+
+        let url = URL + str;
+        let t = this;
+
+        window.audio = new Audio();
+        window.audio.src = url;
+        window.audio.play();
+
+        /*
+        if (promise !== undefined) {
+            promise.then(_ => {
+                console.log('Autoplay started!');
+            }).catch(error => {
+                console.log(error);
+                // Autoplay was prevented.
+                // Show a "Play" button so that user can start playback.
+            });
+        }
+        */
+
+        window.audio.addEventListener("ended", function w() {
+            t.setState({ welcome: false });
+        });
+    }
+
     doDefault() {
-        window.audio.pause();
+        if(!(this.state.title === '' && this.state.message === '' && this.state.iterator === '')) window.audio.pause();
         this.setState({
             title: '',
             message: '',
             iterator: '',
-            paused: false
+            paused: false,
+            welcome: false
         });
     }
 
@@ -115,7 +128,7 @@ class Speech extends Component {
 
     handleSpeech(topic) {
         getArticles(topic).then((result)=>{
-            this.setState({data : result.slice(0, 5)}); // do not slice
+            this.setState({data : result.slice(0, 5), welcome: false}); // do not slice
 
 
             let str = this.replaceSpaces(topic.substring(0, 30)); // do not use substring
@@ -145,16 +158,20 @@ class Speech extends Component {
         let url = URL + str;
         let t = this;
 
-        window.audio = new Audio();
-        window.audio.src = url;
-        window.audio.play();
-        window.audio.addEventListener("ended", function next() {
-            if (i < 4) t.readMessage(res , i + 1); // (i+1 < res.length)
-        });
+        if(this.props.topic !== '') {
+            window.audio = new Audio();
+            window.audio.src = url;
+            window.audio.play();
+            window.audio.addEventListener("ended", function next() {
+                if (i < 4) t.readMessage(res, i + 1); // (i+1 < res.length)
+            });
+        } else {
+            this.doDefault();
+        }
     }
 
     render() {
-        return <div>
+        return <div id='speech'>
             {
                 this.props.topic !== '' ?
                     <div className='box'>
