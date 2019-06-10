@@ -14,7 +14,7 @@ class Speech extends Component {
         this.state = {
             title: '',
             message: '',
-            iterator: '',
+            iterator: -1,
             paused: false,
             welcome: true
         }
@@ -64,7 +64,7 @@ class Speech extends Component {
             if (this.state.iterator > 0) {
                 window.audio.pause();
                 this.setState({paused: false, welcome: false});
-                this.readMessage(this.state.data, this.state.iterator - 1);
+                this.readMessage(this.state.data, this.state.iterator - 1); //TODO
             } else {
                 // window.audio.play();
             }
@@ -76,7 +76,7 @@ class Speech extends Component {
             if (this.state.iterator < this.state.data.length - 1) {
                 window.audio.pause();
                 this.setState({paused: false, welcome: false});
-                this.readMessage(this.state.data, this.state.iterator + 1);
+                this.readMessage(this.state.data, this.state.iterator + 1); //TODO
             } else {
                 // window.audio.play();
             }
@@ -111,11 +111,11 @@ class Speech extends Component {
     }
 
     doDefault() {
-        if(!(this.state.title === '' && this.state.message === '' && this.state.iterator === '')) window.audio.pause();
+        if(!(this.state.title === '' && this.state.message === '' && this.state.iterator === -1)) window.audio.pause();
         this.setState({
             title: '',
             message: '',
-            iterator: '',
+            iterator: -1,
             paused: false,
             welcome: false
         });
@@ -176,9 +176,14 @@ class Speech extends Component {
                 this.props.topic !== '' ?
                     <div className='box'>
                         <img className='play-pause' src={this.state.paused ? playImg : pauseImg} alt=""/>
-                        <div>
-                            <i className="message-number">MESSSAGE NUMBER : {this.state.iterator}</i>
-                        </div>
+                        {
+                            this.state.iterator > -1 ?
+                                <div>
+                                    <i className="message-number">MESSSAGE NUMBER : {this.state.iterator}</i>
+                                </div>
+                                :
+                                <React.Fragment/>
+                        }
                     </div>
 
                 :
