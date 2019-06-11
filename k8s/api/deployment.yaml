@@ -23,7 +23,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: MAX_CHARS_TO_SYNTHESIZE
-              value: '50'
+              value: '5000'
           ports:
             - name: http
               containerPort: 3000
@@ -57,4 +57,4 @@ spec:
         - name: service-bind-volume
           secret:
             defaultMode: 420
-            secretName: binding-texttospeech
+            secretName: binding-texttospeechv2

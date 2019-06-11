@@ -52,3 +52,6 @@ ls_docker_images:
 
 reload_worker:
 	ibmcloud ks worker-reload --workers kube-mil01-pa9ba7245e6f154f03b2d2c40928d563cb-w1 --cluster ssme-app
+
+bind_service:
+	ibmcloud ks cluster-service-bind --cluster $(cluster_name) --namespace ssme-app --service $(service)
