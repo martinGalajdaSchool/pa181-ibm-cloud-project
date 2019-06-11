@@ -84,7 +84,8 @@ class Speech extends Component {
     }
 
     doInit() {
-        let str = this.replaceSpaces(WELCOME.substring(0, 5)); // do not use substring
+        // let str = this.replaceSpaces(WELCOME.substring(0, 5)); // do not use substring
+        let str = this.replaceSpaces(WELCOME);
 
         let url = URL + str;
         let t = this;
@@ -128,10 +129,11 @@ class Speech extends Component {
 
     handleSpeech(topic) {
         getArticles(topic).then((result)=>{
-            this.setState({data : result.slice(0, 5), welcome: false}); // do not slice
+            // this.setState({data : result.slice(0, 5), welcome: false}); // do not slice
+            this.setState({data : result, welcome: false});
 
-
-            let str = this.replaceSpaces(topic.substring(0, 30)); // do not use substring
+            // let str = this.replaceSpaces(topic.substring(0, 30)); // do not use substring
+            let str = this.replaceSpaces(topic);
 
             let url = URL + str;
             let t = this;
@@ -153,7 +155,8 @@ class Speech extends Component {
             iterator: i
         })
 
-        let str = this.replaceSpaces(res[i].title.substring(0, 30)); // do not use substring
+        // let str = this.replaceSpaces(res[i].title.substring(0, 30)); // do not use substring
+        let str = this.replaceSpaces(res[i].title);
 
         let url = URL + str;
         let t = this;
